@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import type { Coord, Question } from '@/types';
 import { animate } from 'motion-v';
-import { onMounted, ref, useTemplateRef } from 'vue';
+import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
+
+const handler = (e: KeyboardEvent) => {
+    if (e.key === 'Backspace') {
+        handleGoBack()
+    }
+}
 
 const props = defineProps<{
     number: number;
@@ -89,6 +95,11 @@ onMounted(() => {
     }, {
         duration: 0.3
     })
+    document.addEventListener('keydown', handler)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('keydown', handler)
 })
 </script>
 
@@ -107,7 +118,6 @@ onMounted(() => {
             </div>
             <div v-else class="answer-container">
                 <div>
-                    <span class="go-back" @click="handleGoBack">Go Back</span>
                     <h2 class="answer-header">{{ `Answer for Question ${number}` }}</h2>
                     <div class="answer-content">
                         <p>{{ question.answer }}</p>
@@ -144,7 +154,7 @@ onMounted(() => {
     gap: 30px;
 }
 
-.go-back {
+/* .go-back {
     position: absolute;
     display: inline-block;
     padding: 10px 20px;
@@ -155,7 +165,7 @@ onMounted(() => {
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--primary-color);
-}
+} */
 
 .question-header,
 .answer-header {
