@@ -79,9 +79,10 @@ const showQuiz = ref(false);
 
 .footer {
     position: absolute;
-    bottom: 50px;
+    bottom: 75px;
+    text-align: center;
     color: var(--primary-color);
-    font-size: 1.75rem;
+    font-size: 4rem;
 }
 </style>
 
